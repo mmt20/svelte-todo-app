@@ -5,7 +5,7 @@
   import TodoList from "$lib/components/TodoList.svelte";
 </script>
 
-<div class="app">
+<div class="app dark">
   <main class="container">
     <header class="header">
       <h1>TODO LIST</h1>
@@ -24,14 +24,6 @@
 </div>
 
 <style lang="scss">
-  :global(body) {
-    box-sizing: border-box;
-    margin: 0;
-    font-family: "Segoe UI", Roboto, sans-serif;
-    background: var(--bg);
-    color: var(--text);
-  }
-
   .app {
     background-color: var(--bg);
     padding: 32px 16px;
@@ -52,6 +44,7 @@
 
     h1 {
       margin: 0;
+      font-weight: 700;
       letter-spacing: 2px;
       color: var(--text);
     }

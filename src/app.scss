@@ -5,6 +5,9 @@
   --muted: #6b6b6b;
   --border: #e0e0e0;
   --accent: #6c63ff;
+
+  // Shadows
+  --shadow-prim: rgba(108, 99, 255, 0.1);
 }
 
 .dark {
@@ -14,4 +17,13 @@
   --muted: #b5b5b5;
   --border: #3a3a3a;
   --accent: #8f88ff;
+  // Shadows
+  --shadow-prim: rgba(143, 136, 255, 0.2);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Roboto, sans-serif;
 }
