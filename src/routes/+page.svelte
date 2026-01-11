@@ -5,45 +5,60 @@
   import TodoList from "$lib/components/TodoList.svelte";
 </script>
 
-<main class="container">
-  <header class="header">
-    <h1>TODO LIST</h1>
-  </header>
+<div class="app">
+  <main class="container">
+    <header class="header">
+      <h1>TODO LIST</h1>
+    </header>
 
-  <section class="controls">
-    <SearchBar />
-    <FilterControls />
-  </section>
+    <section class="controls">
+      <SearchBar />
+      <FilterControls />
+    </section>
 
-  <section class="todo-list">
-    <TodoList />
+    <section class="todo-list">
+      <TodoList />
+    </section>
     <AddButton />
-  </section>
-</main>
+  </main>
+</div>
 
 <style lang="scss">
   :global(body) {
     box-sizing: border-box;
     margin: 0;
-    padding: 20px 0;
     font-family: "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
   }
+
+  .app {
+    background-color: var(--bg);
+    padding: 32px 16px;
+    min-height: 100vh;
+  }
+
   .container {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    height: 100vh;
-    background-color: #f0f0f0;
     max-width: 600px;
     margin: 0 auto;
     width: 100%;
-    &.dark {
-      background: #1e1e1e;
-      color: #e8eef5;
+  }
+
+  .header {
+    padding: 32px;
+    text-align: center;
+
+    h1 {
+      margin: 0;
+      letter-spacing: 2px;
+      color: var(--text);
     }
-    .controls {
-      display: flex;
-      gap: 16px;
-    }
+  }
+
+  .controls {
+    display: flex;
+    gap: 16px;
   }
 </style>
