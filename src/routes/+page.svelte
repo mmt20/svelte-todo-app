@@ -25,12 +25,12 @@
   :global(body) {
     box-sizing: border-box;
     margin: 0;
-    padding: 0;
+    padding: 20px 0;
     font-family: "Segoe UI", Roboto, sans-serif;
   }
   .container {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
     height: 100vh;
     background-color: #f0f0f0;
@@ -40,6 +40,10 @@
     &.dark {
       background: #1e1e1e;
       color: #e8eef5;
+    }
+    .controls {
+      display: flex;
+      gap: 16px;
     }
   }
 </style>
