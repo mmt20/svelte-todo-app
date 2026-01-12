@@ -1,9 +1,10 @@
 <script lang="ts">
+  import emptyImage from "$lib/assets/empty.svg";
   let { text } = $props();
 </script>
 
 <div class="empty-state">
-  <img src="src\lib\assets\empty.svg" alt="No todos" />
+  <img src={emptyImage} alt="No todos" />
   <p>{text}</p>
 </div>
 
