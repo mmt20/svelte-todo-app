@@ -1,38 +1,107 @@
-# sv
+# Todo App - Svelte 5
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+A modern, responsive todo list application built with **Svelte 5** , showcasing the latest features including **runes** for state management and **signal-based reactivity**.
 
-## Creating a project
+## 🎨 Design
 
-If you're seeing this, you've probably already done this step. Congrats!
+The UI/UX design for this project is available on Figma:
 
-```sh
-# create a new project in the current directory
-npx sv create
+**[View Figma Design File →](https://www.figma.com/community/file/1287029163993360080/simple-todo-list-design)**
 
-# create a new project in my-app
-npx sv create my-app
+## 🚀 Features
+
+- ✅ **Add, Edit, and Delete Todos** - Full CRUD operations
+- 🔍 **Search Functionality** - Quickly find todos with real-time search
+- 🎯 **Filter Controls** - View all, active, or completed todos
+- 🌓 **Dark Mode** - Toggle between light and dark themes
+- 📱 **Responsive Design** - Works seamlessly on desktop, tablet, and mobile devices
+- ⚡ **Svelte 5 Runes** - Leveraging `$state`, `$derived`, and `$effect` for reactive state management
+- 🎨 **Modern UI** - Clean and intuitive interface with smooth animations
+
+## 🛠️ Tech Stack
+
+- **[Svelte 5](https://svelte.dev/)** - Frontend framework with signal-based reactivity
+- **[TypeScript](https://www.typescriptlang.org/)** - Type safety
+- **[SASS](https://sass-lang.com/)** - Advanced styling with nested rules and variables
+- **[Lucide Svelte](https://lucide.dev/)** - Beautiful icon library
+- **[Vite](https://vitejs.dev/)** - Fast build tool and dev server
+
+## 📦 Installation
+
+1. **Clone the repository** (or navigate to the project directory)
+
+2. **Install dependencies:**
+
+   ```bash
+   pnpm install
+   ```
+
+3. **Start the development server:**
+
+   ```bash
+   pnpm run dev
+   ```
+
+4. **Open your browser** and navigate to `http://localhost:5173`
+
+## 🎯 Available Scripts
+
+## 📁 Project Structure
+
+```
+src/
+├── lib/
+│   ├── components/          # Reusable Svelte components
+│   │   ├── AddButton.svelte
+│   │   ├── EmptyState.svelte
+│   │   ├── FilterControls.svelte
+│   │   ├── Modal.svelte
+│   │   ├── SearchBar.svelte
+│   │   ├── TodoItem.svelte
+│   │   └── TodoList.svelte
+│   ├── stores/              # Global state stores
+│   │   └── theme.svelte.ts
+│   ├── types/               # TypeScript type definitions
+│   │   └── index.ts
+│   └── assets/              # Static assets (icons, images)
+├── routes/
+│   └── +page.svelte         # Main application page
+└── app.html                 # HTML template
 ```
 
-## Developing
+## 🔮 Future Enhancements
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+This project is currently using **mock data** for demonstration purposes. The following features are planned for future releases:
 
-```sh
-npm run dev
+### 🔄 API Integration
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
+- Replace mock todos with **RESTful API endpoints**
+- Implement data persistence with a backend database
 
-## Building
+### 🔐 Authentication
 
-To create a production version of your app:
+- **User login and registration** system
+- **Logout functionality** with session management
+- User-specific todo lists
+- Secure authentication with JWT or session-based auth
 
-```sh
-npm run build
-```
+### 📊 Additional Features (Planned)
 
-You can preview the production build with `npm run preview`.
+- Todo categories and tags
+- Due dates
+- Priority levels
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+## 🎓 Learning Objectives
+
+This project demonstrates:
+
+- **Svelte 5 Runes** (`$state`, `$derived`, `$effect`)
+- **Component composition** and reusability
+- **TypeScript** integration with Svelte
+- **Reactive state management** without external libraries
+- **Modern CSS** with SASS preprocessing
+- **Responsive design** principles
+
+---
+
+**Built with ❤️ using Svelte 5**
