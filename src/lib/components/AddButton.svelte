@@ -19,7 +19,6 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    margin: 350px 24px 24px auto;
     transition:
       background-color 0.3s ease,
       box-shadow 0.3s ease;

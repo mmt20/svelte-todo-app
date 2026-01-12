@@ -7,17 +7,33 @@
   console.log(todos);
 </script>
 
-<ul class="todo-list">
-  {#each todos as todo (todo.id)}
-    <TodoItem {...todo} />
-  {/each}
-</ul>
-<AddButton />
+<div class="todo-container">
+  <ul class="todo-list">
+    {#each todos as todo (todo.id)}
+      <TodoItem {...todo} />
+    {/each}
+  </ul>
+  <div class="add-button-wrapper">
+    <AddButton />
+  </div>
+</div>
 
 <style lang="scss">
+  .todo-container {
+    position: relative;
+    min-height: 400px;
+  }
+
   .todo-list {
     list-style: none;
     padding: 0;
     margin: 6px 12px;
+    padding-bottom: 80px;
+  }
+
+  .add-button-wrapper {
+    position: absolute;
+    bottom: 24px;
+    right: 24px;
   }
 </style>
