@@ -1,4 +1,5 @@
 <script lang="ts">
+  import AddButton from "./AddButton.svelte";
   import TodoItem from "./TodoItem.svelte";
 </script>
 
@@ -7,6 +8,7 @@
   <TodoItem />
   <TodoItem />
 </ul>
+<AddButton />
 
 <style lang="scss">
   .todo-list {

@@ -30,10 +30,10 @@
     cursor: pointer;
     transition: all 0.3s ease;
     background-color: var(--accent);
-    color: var(--surface);
+    color: var(--white-text);
 
     option {
-      background-color: var(--surface);
+      background-color: var(--white-text);
       color: var(--text);
       padding: 8px 12px;
       font-size: 14px;
@@ -62,7 +62,7 @@
     background-color: var(--accent);
     cursor: pointer;
     transition: all 0.3s ease;
-    color: var(--surface);
+    color: var(--white-text);
     &:hover {
       border-color: var(--accent);
       background-color: var(--bg);

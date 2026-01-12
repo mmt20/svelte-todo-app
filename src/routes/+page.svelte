@@ -1,5 +1,4 @@
 <script>
-  import AddButton from "$lib/components/AddButton.svelte";
   import FilterControls from "$lib/components/FilterControls.svelte";
   import SearchBar from "$lib/components/SearchBar.svelte";
   import TodoList from "$lib/components/TodoList.svelte";
@@ -23,7 +22,6 @@
     <section class="todo-list">
       <TodoList />
     </section>
-    <AddButton />
   </main>
 </div>
 

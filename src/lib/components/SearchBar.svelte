@@ -23,7 +23,7 @@
       border: 2px solid var(--border);
       border-radius: 8px;
       appearance: none;
-      background-color: var(--surface);
+      background-color: var(--white-text);
       color: var(--text);
       &::-webkit-search-cancel-button {
         -webkit-appearance: none;
