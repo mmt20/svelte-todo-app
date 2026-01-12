@@ -12,8 +12,12 @@
     </header>
 
     <section class="controls">
-      <SearchBar />
-      <FilterControls />
+      <div class="search-wrapper">
+        <SearchBar />
+      </div>
+      <div class="filter-wrapper">
+        <FilterControls />
+      </div>
     </section>
 
     <section class="todo-list">
@@ -33,7 +37,7 @@
   .container {
     display: flex;
     flex-direction: column;
-    max-width: 600px;
+    max-width: 800px;
     margin: 0 auto;
     width: 100%;
   }
@@ -53,5 +57,10 @@
   .controls {
     display: flex;
     gap: 16px;
+
+    .search-wrapper {
+      flex: 1;
+      min-width: 0;
+    }
   }
 </style>
