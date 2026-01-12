@@ -1,9 +1,10 @@
-<script>
+<script lang="ts">
   import { Search } from "lucide-svelte";
+  let { searchQuery = $bindable("") }: { searchQuery: string } = $props();
 </script>
 
-<form class="search-bar" role="search">
-  <input id="search" type="search" placeholder="Search notes…" />
+<form class="search-bar" role="search" onsubmit={(e) => e.preventDefault()}>
+  <input id="search" type="search" placeholder="Search notes…" bind:value={searchQuery} />
   <button type="submit" class="search-btn" aria-label="Search">
     <Search />
   </button>
@@ -24,7 +25,7 @@
       border-radius: 8px;
       appearance: none;
       background-color: var(--white-text);
-      color: var(--text);
+      color: var(--text-dark);
       &::-webkit-search-cancel-button {
         -webkit-appearance: none;
         appearance: none;

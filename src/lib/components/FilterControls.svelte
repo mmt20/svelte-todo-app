@@ -8,12 +8,23 @@
     localStorage.setItem("darkMode", String(theme.darkMode));
     window.document.body.classList.toggle("dark", theme.darkMode);
   }
-  let { todos = $bindable(), filteredTodos = $bindable([]) }: { todos: Todo[]; filteredTodos: Todo[] } = $props();
+  let {
+    todos,
+    filteredTodos = $bindable([]),
+    searchQuery = "",
+  }: { todos: Todo[]; filteredTodos: Todo[]; searchQuery: string } = $props();
   let filter = $state<Filter>("ALL");
 
   $effect(() => {
     let result = todos;
 
+    // Apply search filter
+    if (searchQuery.trim()) {
+      const query = searchQuery.toLowerCase();
+      result = result.filter((todo: Todo) => todo.text.toLowerCase().includes(query));
+    }
+
+    // Apply completion filter
     if (filter === "ACTIVE") {
       result = result.filter((todo: Todo) => !todo.completed);
     } else if (filter === "COMPLETED") {

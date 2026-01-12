@@ -24,9 +24,10 @@
   ]);
 
   let filteredTodos = $state<Todo[]>([]);
+  let searchQuery = $state("");
 
   // Determine empty reason
-  let emptyReason = $derived<EmptyReason>(todos.length === 0 ? "empty" : "filter");
+  let emptyReason = $derived<EmptyReason>(todos.length === 0 ? "empty" : searchQuery.trim() ? "search" : "filter");
 
   let showModal = $state(false);
   let newNoteText = $state("");
@@ -65,10 +66,10 @@
 
     <section class="controls">
       <div class="search-wrapper">
-        <SearchBar />
+        <SearchBar bind:searchQuery />
       </div>
       <div class="filter-wrapper">
-        <FilterControls {todos} bind:filteredTodos />
+        <FilterControls {todos} bind:filteredTodos {searchQuery} />
       </div>
     </section>
 
