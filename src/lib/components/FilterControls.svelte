@@ -1,5 +1,12 @@
 <script>
-  import { Moon } from "lucide-svelte";
+  import { theme } from "$lib/theme/theme.svelte";
+  import { Moon, Sun } from "lucide-svelte";
+
+  function toggle() {
+    theme.darkMode = !theme.darkMode;
+    localStorage.setItem("darkMode", String(theme.darkMode));
+    window.document.body.classList.toggle("dark", theme.darkMode);
+  }
 </script>
 
 <div class="filter-group">
@@ -9,8 +16,12 @@
     <option value="COMPLETED">COMPLETED</option>
   </select>
 
-  <button class="theme-toggle" aria-label="Toggle theme">
-    <Moon />
+  <button class="theme-toggle" aria-label="Toggle theme" onclick={toggle}>
+    {#if theme.darkMode}
+      <Sun />
+    {:else}
+      <Moon />
+    {/if}
   </button>
 </div>
 

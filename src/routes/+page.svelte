@@ -2,13 +2,27 @@
   import FilterControls from "$lib/components/FilterControls.svelte";
   import SearchBar from "$lib/components/SearchBar.svelte";
   import TodoList from "$lib/components/TodoList.svelte";
+  import { theme } from "$lib/theme/theme.svelte";
   import type { Todo } from "$lib/types";
+  import { onMount } from "svelte";
 
   // mock data
-  let todos = $state<Todo[]>([]);
+  let todos = $state<Todo[]>([
+    { id: 1, text: "NOTE #1", completed: false },
+    { id: 2, text: "NOTE #2", completed: true },
+    { id: 3, text: "NOTE #3", completed: false },
+  ]);
+  onMount(() => {
+    // Load theme from localStorage
+    const savedTheme = localStorage.getItem("darkMode");
+    if (savedTheme) {
+      theme.darkMode = savedTheme === "true";
+    }
+    window.document.body.classList.toggle("dark", theme.darkMode);
+  });
 </script>
 
-<div class="app dark">
+<div class="app">
   <main class="container">
     <header class="header">
       <h1>TODO LIST</h1>
