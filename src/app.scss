@@ -1,29 +1,51 @@
-:root {
-  --bg: #f0f0f0;
-  --surface: #ffffff;
-  --text: #252525;
-  --muted: #6b6b6b;
-  --border: #e0e0e0;
-  --accent: #6c63ff;
+@use "sass:map";
 
-  // Shadows
-  --shadow-prim: rgba(108, 99, 255, 0.1);
+$themes: (
+  light: (
+    bg: #f0f0f0,
+    surface: #ffffff,
+    text: #252525,
+    muted: #6b6b6b,
+    border: #e0e0e0,
+    accent: #6c63ff,
+    shadow-prim: rgba(108, 99, 255, 0.1),
+  ),
+  dark: (
+    bg: #1e1e1e,
+    surface: #252525,
+    text: #f0f0f0,
+    muted: #b5b5b5,
+    border: #3a3a3a,
+    accent: #8f88ff,
+    shadow-prim: rgba(143, 136, 255, 0.2),
+  ),
+);
+
+@mixin theme-vars($theme-name) {
+  @each $key, $value in map.get($themes, $theme-name) {
+    --#{$key}: #{$value};
+  }
+}
+
+:root {
+  @include theme-vars(light);
 }
 
 .dark {
-  --bg: #1e1e1e;
-  --surface: #252525;
-  --text: #f0f0f0;
-  --muted: #b5b5b5;
-  --border: #3a3a3a;
-  --accent: #8f88ff;
-  // Shadows
-  --shadow-prim: rgba(143, 136, 255, 0.2);
+  @include theme-vars(dark);
+}
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
-* {
+html {
+  font-family: "Segoe UI", Roboto, system-ui, sans-serif;
+}
+
+body {
   margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Segoe UI", Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
 }

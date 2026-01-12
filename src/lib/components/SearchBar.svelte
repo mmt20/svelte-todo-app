@@ -58,11 +58,6 @@
 
       .search-btn {
         padding: 6px;
-
-        svg {
-          width: 18px;
-          height: 18px;
-        }
       }
     }
   }
