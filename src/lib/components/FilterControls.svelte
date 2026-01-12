@@ -25,9 +25,9 @@
     }
 
     // Apply completion filter
-    if (filter === "ACTIVE") {
+    if (filter === "INCOMPLETE") {
       result = result.filter((todo: Todo) => !todo.completed);
-    } else if (filter === "COMPLETED") {
+    } else if (filter === "COMPLETE") {
       result = result.filter((todo: Todo) => todo.completed);
     }
 
@@ -37,9 +37,9 @@
 
 <div class="filter-group">
   <select class="filter-select" bind:value={filter}>
-    <option value="ALL">ALL</option>
-    <option value="ACTIVE">ACTIVE</option>
-    <option value="COMPLETED">COMPLETED</option>
+    <option value="ALL">All</option>
+    <option value="COMPLETE">Complete</option>
+    <option value="INCOMPLETE">Incomplete</option>
   </select>
 
   <button class="theme-toggle" aria-label="Toggle theme" onclick={toggle}>
