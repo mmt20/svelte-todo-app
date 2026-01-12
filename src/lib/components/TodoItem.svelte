@@ -1,12 +1,32 @@
 <script lang="ts">
   import type { Todo } from "$lib/types";
-  import { Trash, SquarePen } from "lucide-svelte";
+  import { Trash, SquarePen, Check, X } from "lucide-svelte";
   interface TodoProps {
     todo: Todo;
     deleteTodo: (id: string) => void;
     toggleTodo: (id: string) => void;
   }
-  let { todo, deleteTodo, toggleTodo }: TodoProps = $props();
+  let { todo = $bindable(), deleteTodo, toggleTodo }: TodoProps = $props();
+
+  let isEditing = $state(false);
+  let editText = $state("");
+
+  function startEditing() {
+    isEditing = true;
+    editText = todo.text;
+  }
+
+  function saveEdit() {
+    if (editText.trim()) {
+      todo.text = editText.trim();
+    }
+    isEditing = false;
+  }
+
+  function cancelEdit() {
+    isEditing = false;
+    editText = "";
+  }
 </script>
 
 <li class="todo-item" class:completed={todo.completed}>
@@ -21,15 +41,36 @@
     <span class="sr-only">{todo.text}</span>
   </label>
 
-  <span class="todo-text">{todo.text}</span>
+  {#if isEditing}
+    <input
+      type="text"
+      class="edit-input"
+      bind:value={editText}
+      onkeydown={(e) => {
+        if (e.key === "Enter") saveEdit();
+        if (e.key === "Escape") cancelEdit();
+      }}
+    />
+  {:else}
+    <span class="todo-text">{todo.text}</span>
+  {/if}
 
   <div class="actions">
-    <button class="action-btn edit">
-      <SquarePen />
-    </button>
-    <button class="action-btn delete" onclick={() => deleteTodo(todo.id)}>
-      <Trash />
-    </button>
+    {#if isEditing}
+      <button class="action-btn save" onclick={saveEdit} aria-label="Save">
+        <Check />
+      </button>
+      <button class="action-btn cancel" onclick={cancelEdit} aria-label="Cancel">
+        <X />
+      </button>
+    {:else}
+      <button class="action-btn edit" onclick={startEditing} aria-label="Edit">
+        <SquarePen />
+      </button>
+      <button class="action-btn delete" onclick={() => deleteTodo(todo.id)} aria-label="Delete">
+        <Trash />
+      </button>
+    {/if}
   </div>
 </li>
 
@@ -38,11 +79,13 @@
     display: flex;
     align-items: center;
     gap: 16px;
-    padding: 14px 12px;
-    margin-bottom: 12px;
+    padding: 8px 12px;
+
     border-bottom: 2px solid var(--border);
     transition: border-color 0.2s ease;
-
+    &:last-child {
+      border-bottom: none;
+    }
     &:hover,
     &:focus-within {
       border-color: var(--accent);
@@ -151,13 +194,25 @@
     opacity: 0;
     transition: opacity 0.3s ease;
 
-    /* Show actions on hover or keyboard focus */
     .todo-item:hover &,
     .todo-item:focus-within & {
       opacity: 1;
     }
   }
+  .edit-input {
+    flex: 1;
+    padding: 8px;
+    border: 2px solid var(--accent);
+    border-radius: 6px;
+    font-size: 16px;
+    background: white;
+    color: #2c3e50;
 
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.1);
+    }
+  }
   .action-btn {
     padding: 8px;
     background: transparent;
@@ -183,6 +238,16 @@
 
     &.delete:hover,
     &.delete:focus {
+      color: #ff6b6b;
+      background: rgba(255, 107, 107, 0.1);
+    }
+    &.save:hover,
+    &.save:focus {
+      color: #51cf66;
+      background: rgba(81, 207, 102, 0.1);
+    }
+    &.cancel:hover,
+    &.cancel:focus {
       color: #ff6b6b;
       background: rgba(255, 107, 107, 0.1);
     }

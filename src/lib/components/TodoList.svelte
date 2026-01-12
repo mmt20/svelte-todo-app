@@ -9,7 +9,7 @@
     deleteTodo: (id: string) => void;
     toggleTodo: (id: string) => void;
   }
-  let { todos, openModal, deleteTodo, toggleTodo }: TodoListProps = $props();
+  let { todos = $bindable(), openModal, deleteTodo, toggleTodo }: TodoListProps = $props();
 </script>
 
 <div class="todo-container">
@@ -17,8 +17,8 @@
     <EmptyState text="Empty..." />
   {:else}
     <ul class="todo-list">
-      {#each todos as todo (todo.id)}
-        <TodoItem {todo} {deleteTodo} {toggleTodo} />
+      {#each todos as todo, i (todo.id)}
+        <TodoItem bind:todo={todos[i]} {deleteTodo} {toggleTodo} />
       {/each}
     </ul>
   {/if}

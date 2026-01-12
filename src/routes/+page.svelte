@@ -25,6 +25,9 @@
 
   let showModal = $state(false);
   let newNoteText = $state("");
+  let editingId = $state<string | null>(null);
+  let editText = $state("");
+
   function openModal() {
     showModal = true;
     newNoteText = "";
@@ -49,6 +52,28 @@
   function toggleTodo(id: string) {
     todos = todos.map((t) => (t.id === id ? { ...t, completed: !t.completed } : t));
   }
+  // For editing todos
+  function startEdit(id: string, text: string) {
+    editingId = id;
+    editText = text;
+    console.log("Editing todo ID:", id);
+    console.log("Current edit text:", editText);
+  }
+
+  function cancelEdit() {
+    editingId = null;
+    editText = "";
+  }
+
+  function saveEdit() {
+    if (editingId === null) return;
+    console.log("Saving edit for ID:", editingId, "with text:", editText);
+    const todo = todos.find((t) => t.id === editingId);
+    if (todo && editText.trim()) {
+      todo.text = editText.trim();
+    }
+    cancelEdit();
+  }
 </script>
 
 <div class="app">
@@ -67,7 +92,7 @@
     </section>
 
     <section class="todo-list">
-      <TodoList {todos} {openModal} {deleteTodo} {toggleTodo} />
+      <TodoList bind:todos {openModal} {deleteTodo} {toggleTodo} />
     </section>
   </main>
   {#if showModal}
