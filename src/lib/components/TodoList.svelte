@@ -5,7 +5,6 @@
   import TodoItem from "./TodoItem.svelte";
 
   let todos: Todo[] = $props();
-  console.log(todos);
 </script>
 
 <div class="todo-container">

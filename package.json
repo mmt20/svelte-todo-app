@@ -22,6 +22,7 @@
 	},
 	"dependencies": {
 		"lucide-svelte": "^0.562.0",
-		"sass-embedded": "^1.97.2"
+		"sass-embedded": "^1.97.2",
+		"uuid": "^13.0.0"
 	}
 }

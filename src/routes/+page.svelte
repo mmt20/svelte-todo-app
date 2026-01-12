@@ -5,15 +5,17 @@
   import { theme } from "$lib/theme/theme.svelte";
   import type { Todo } from "$lib/types";
   import { onMount } from "svelte";
+  import { v4 as uuidv4 } from "uuid";
 
   // mock data
   let todos = $state<Todo[]>([
-    { id: 1, text: "NOTE #1", completed: false },
-    { id: 2, text: "NOTE #2", completed: true },
-    { id: 3, text: "NOTE #3", completed: false },
+    { id: uuidv4(), text: "NOTE #1", completed: false },
+    { id: uuidv4(), text: "NOTE #2", completed: true },
+    { id: uuidv4(), text: "NOTE #3", completed: false },
   ]);
+
+  // Load theme from localStorage on mount
   onMount(() => {
-    // Load theme from localStorage
     const savedTheme = localStorage.getItem("darkMode");
     if (savedTheme) {
       theme.darkMode = savedTheme === "true";
