@@ -35,12 +35,15 @@
   }
 
   .modal {
+    display: flex;
+    flex-direction: column;
     background-color: var(--surface);
-    padding: 32px;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px var(--shadow-prim);
+    padding: 36px 32px 28px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px var(--shadow-prim);
     width: 90%;
-    max-width: 400px;
+    max-width: 420px;
+    min-height: 360px;
     box-sizing: border-box;
 
     @media (max-width: 480px) {
@@ -62,10 +65,10 @@
 
   input[type="text"] {
     width: 100%;
-    padding: 12px;
+    padding: 14px 16px;
     margin-bottom: 24px;
     border: 2px solid var(--border);
-    border-radius: 6px;
+    border-radius: 8px;
     font-size: 16px;
     box-sizing: border-box;
 
@@ -77,8 +80,10 @@
   }
 
   .modal-actions {
+    margin-top: auto;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
+    align-items: center;
     gap: 16px;
   }
 
@@ -91,17 +96,24 @@
     transition: background-color 0.3s ease;
 
     &.btn-cancel {
-      background-color: var(--border);
-      color: var(--text);
-
+      background: transparent;
+      border: 2px solid var(--accent);
+      color: var(--accent);
+      padding: 10px 20px;
+      font-weight: 600;
+      border-radius: 6px;
       &:hover {
-        filter: brightness(0.95);
+        background-color: var(--accent-hover);
+        color: var(--text);
       }
     }
 
     &.btn-apply {
       background-color: var(--accent);
       color: var(--white-text);
+      padding: 10px 24px;
+      font-weight: 600;
+      border-radius: 6px;
 
       &:hover {
         background-color: var(--accent-hover);
