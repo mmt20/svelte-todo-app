@@ -5,11 +5,7 @@
   import type { Todo } from "$lib/types";
 
   // mock data
-  let todos = $state<Todo[]>([
-    { id: 1, text: "NOTE #1", completed: false },
-    { id: 2, text: "NOTE #2", completed: true },
-    { id: 3, text: "NOTE #3", completed: false },
-  ]);
+  let todos = $state<Todo[]>([]);
 </script>
 
 <div class="app dark">
