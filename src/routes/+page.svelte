@@ -1,4 +1,5 @@
 <script lang="ts">
+  import AddNewNoteModal from "$lib/components/AddNewNoteModal.svelte";
   import FilterControls from "$lib/components/FilterControls.svelte";
   import SearchBar from "$lib/components/SearchBar.svelte";
   import TodoList from "$lib/components/TodoList.svelte";
@@ -6,13 +7,6 @@
   import type { Todo } from "$lib/types";
   import { onMount } from "svelte";
   import { v4 as uuidv4 } from "uuid";
-
-  // mock data
-  let todos = $state<Todo[]>([
-    { id: uuidv4(), text: "NOTE #1", completed: false },
-    { id: uuidv4(), text: "NOTE #2", completed: true },
-    { id: uuidv4(), text: "NOTE #3", completed: false },
-  ]);
 
   // Load theme from localStorage on mount
   onMount(() => {
@@ -22,6 +16,31 @@
     }
     window.document.body.classList.toggle("dark", theme.darkMode);
   });
+  // mock data
+  let todos = $state<Todo[]>([
+    { id: uuidv4(), text: "NOTE #1", completed: false },
+    { id: uuidv4(), text: "NOTE #2", completed: true },
+    { id: uuidv4(), text: "NOTE #3", completed: false },
+  ]);
+
+  let showModal = $state(false);
+  let newNoteText = $state("");
+  function openModal() {
+    showModal = true;
+    newNoteText = "";
+  }
+
+  function closeModal() {
+    showModal = false;
+    newNoteText = "";
+  }
+
+  function addNote() {
+    if (newNoteText.trim() === "") return;
+    todos = [...todos, { id: uuidv4(), text: newNoteText.trim(), completed: false }];
+
+    closeModal();
+  }
 </script>
 
 <div class="app">
@@ -40,9 +59,12 @@
     </section>
 
     <section class="todo-list">
-      <TodoList {...todos} />
+      <TodoList {todos} {openModal} />
     </section>
   </main>
+  {#if showModal}
+    <AddNewNoteModal {closeModal} {addNote} bind:value={newNoteText} />
+  {/if}
 </div>
 
 <style lang="scss">

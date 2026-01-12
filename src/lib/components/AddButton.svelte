@@ -1,8 +1,10 @@
 <script lang="ts">
   import { Plus } from "lucide-svelte";
+
+  let { onclick }: { onclick: () => void } = $props();
 </script>
 
-<button class="fab" aria-label="Add note" title="Add note" type="button">
+<button class="fab" aria-label="Add note" title="Add note" type="button" {onclick}>
   <Plus aria-hidden="true" focusable="false" />
 </button>
 

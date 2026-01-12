@@ -4,7 +4,7 @@
   import EmptyState from "./EmptyState.svelte";
   import TodoItem from "./TodoItem.svelte";
 
-  let todos: Todo[] = $props();
+  let { todos, openModal }: { todos: Todo[]; openModal: () => void } = $props();
 </script>
 
 <div class="todo-container">
@@ -17,7 +17,7 @@
       {/each}
     </ul>
     <div class="add-button-wrapper">
-      <AddButton />
+      <AddButton onclick={openModal} />
     </div>
   {/if}
 </div>
