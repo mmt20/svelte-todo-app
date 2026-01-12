@@ -11,5 +11,7 @@
 <style lang="scss">
   .todo-list {
     list-style: none;
+    padding: 0;
+    margin: 6px 12px;
   }
 </style>

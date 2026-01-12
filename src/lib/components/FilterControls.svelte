@@ -25,12 +25,20 @@
     border: 2px solid var(--accent);
     border-radius: 8px;
     font-weight: 600;
-    font-size: 0.85rem;
+    font-size: 14px;
     color: var(--text);
     cursor: pointer;
     transition: all 0.3s ease;
     background-color: var(--accent);
     color: var(--surface);
+
+    option {
+      background-color: var(--surface);
+      color: var(--text);
+      padding: 8px 12px;
+      font-size: 14px;
+      font-weight: 600;
+    }
 
     &:hover {
       border-color: var(--accent);
@@ -65,6 +73,68 @@
       outline: none;
       border-color: var(--accent);
       box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.1);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .filter-group {
+      width: 100%;
+      justify-content: space-between;
+    }
+
+    .filter-select {
+      flex: 1;
+      font-size: 13px;
+      max-width: calc(100% - 50px);
+
+      option {
+        font-size: 13px;
+        padding: 6px 10px;
+      }
+    }
+  }
+
+  @media (max-width: 480px) {
+    .filter-select {
+      padding: 7px 10px;
+      font-size: 12px;
+      max-width: calc(100% - 45px);
+
+      option {
+        font-size: 12px;
+        padding: 6px 8px;
+      }
+    }
+
+    .theme-toggle {
+      padding: 7px;
+
+      :global(svg) {
+        width: 18px;
+        height: 18px;
+      }
+    }
+  }
+
+  @media (max-width: 360px) {
+    .filter-select {
+      padding: 6px 8px;
+      font-size: 11px;
+      max-width: calc(100% - 40px);
+
+      option {
+        font-size: 11px;
+        padding: 5px 6px;
+      }
+    }
+
+    .theme-toggle {
+      padding: 6px;
+
+      :global(svg) {
+        width: 16px;
+        height: 16px;
+      }
     }
   }
 </style>

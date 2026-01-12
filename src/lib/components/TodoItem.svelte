@@ -130,6 +130,7 @@
 
   .todo-text {
     flex: 1;
+    font-size: 16px;
     font-weight: 500;
     line-height: 1.4;
     color: var(--text);
@@ -179,6 +180,61 @@
     &.delete:focus {
       color: #ff6b6b;
       background: rgba(255, 107, 107, 0.1);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .todo-item {
+      gap: 12px;
+      padding: 12px 10px;
+    }
+
+    .todo-text {
+      font-size: 15px;
+    }
+
+    .actions {
+      opacity: 1;
+    }
+
+    .action-btn {
+      padding: 6px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .todo-item {
+      gap: 10px;
+      padding: 10px 8px;
+    }
+
+    .todo-text {
+      font-size: 14px;
+    }
+
+    .checkbox-wrapper {
+      padding: 4px;
+
+      .checkmark {
+        width: 20px;
+        height: 20px;
+
+        &::after {
+          left: 5px;
+          top: 2px;
+          width: 5px;
+          height: 10px;
+        }
+      }
+    }
+
+    .action-btn {
+      padding: 6px;
+
+      :global(svg) {
+        width: 16px;
+        height: 16px;
+      }
     }
   }
 </style>
