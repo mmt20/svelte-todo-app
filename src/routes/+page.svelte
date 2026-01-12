@@ -4,7 +4,7 @@
   import SearchBar from "$lib/components/SearchBar.svelte";
   import TodoList from "$lib/components/TodoList.svelte";
   import { theme } from "$lib/theme/theme.svelte";
-  import type { Todo } from "$lib/types";
+  import type { EmptyReason, Todo } from "$lib/types";
   import { onMount } from "svelte";
   import { v4 as uuidv4 } from "uuid";
 
@@ -23,10 +23,13 @@
     { id: uuidv4(), text: "NOTE #3", completed: false },
   ]);
 
+  let filteredTodos = $state<Todo[]>([]);
+
+  // Determine empty reason
+  let emptyReason = $derived<EmptyReason>(todos.length === 0 ? "empty" : "filter");
+
   let showModal = $state(false);
   let newNoteText = $state("");
-  let editingId = $state<string | null>(null);
-  let editText = $state("");
 
   function openModal() {
     showModal = true;
@@ -52,28 +55,6 @@
   function toggleTodo(id: string) {
     todos = todos.map((t) => (t.id === id ? { ...t, completed: !t.completed } : t));
   }
-  // For editing todos
-  function startEdit(id: string, text: string) {
-    editingId = id;
-    editText = text;
-    console.log("Editing todo ID:", id);
-    console.log("Current edit text:", editText);
-  }
-
-  function cancelEdit() {
-    editingId = null;
-    editText = "";
-  }
-
-  function saveEdit() {
-    if (editingId === null) return;
-    console.log("Saving edit for ID:", editingId, "with text:", editText);
-    const todo = todos.find((t) => t.id === editingId);
-    if (todo && editText.trim()) {
-      todo.text = editText.trim();
-    }
-    cancelEdit();
-  }
 </script>
 
 <div class="app">
@@ -87,12 +68,12 @@
         <SearchBar />
       </div>
       <div class="filter-wrapper">
-        <FilterControls />
+        <FilterControls {todos} bind:filteredTodos />
       </div>
     </section>
 
     <section class="todo-list">
-      <TodoList bind:todos {openModal} {deleteTodo} {toggleTodo} />
+      <TodoList bind:todos={filteredTodos} {openModal} {deleteTodo} {toggleTodo} {emptyReason} />
     </section>
   </main>
   {#if showModal}

@@ -1,5 +1,6 @@
-<script>
+<script lang="ts">
   import { theme } from "$lib/theme/theme.svelte";
+  import type { Filter, Todo } from "$lib/types";
   import { Moon, Sun } from "lucide-svelte";
 
   function toggle() {
@@ -7,10 +8,24 @@
     localStorage.setItem("darkMode", String(theme.darkMode));
     window.document.body.classList.toggle("dark", theme.darkMode);
   }
+  let { todos = $bindable(), filteredTodos = $bindable([]) }: { todos: Todo[]; filteredTodos: Todo[] } = $props();
+  let filter = $state<Filter>("ALL");
+
+  $effect(() => {
+    let result = todos;
+
+    if (filter === "ACTIVE") {
+      result = result.filter((todo: Todo) => !todo.completed);
+    } else if (filter === "COMPLETED") {
+      result = result.filter((todo: Todo) => todo.completed);
+    }
+
+    filteredTodos = result;
+  });
 </script>
 
 <div class="filter-group">
-  <select class="filter-select">
+  <select class="filter-select" bind:value={filter}>
     <option value="ALL">ALL</option>
     <option value="ACTIVE">ACTIVE</option>
     <option value="COMPLETED">COMPLETED</option>
@@ -44,17 +59,12 @@
     color: var(--white-text);
 
     option {
-      background-color: var(--white-text);
-      color: var(--text);
-      padding: 8px 12px;
-      font-size: 14px;
-      font-weight: 600;
+      background-color: var(--accent);
+      color: var(--white-text);
     }
 
     &:hover {
-      border-color: var(--accent);
-      background-color: var(--bg);
-      color: var(--text);
+      background-color: var(--accent-hover);
     }
 
     &:focus {
@@ -75,14 +85,12 @@
     transition: all 0.3s ease;
     color: var(--white-text);
     &:hover {
-      border-color: var(--accent);
-      background-color: var(--bg);
-      color: var(--text);
+      border-color: var(--accent-hover);
     }
 
     &:focus {
       outline: none;
-      border-color: var(--accent);
+
       box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.1);
     }
   }

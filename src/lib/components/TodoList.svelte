@@ -1,20 +1,28 @@
 <script lang="ts">
-  import type { Todo } from "$lib/types";
+  import type { EmptyReason, Todo } from "$lib/types";
   import AddButton from "./AddButton.svelte";
   import EmptyState from "./EmptyState.svelte";
   import TodoItem from "./TodoItem.svelte";
+
   interface TodoListProps {
     todos: Todo[];
     openModal: () => void;
     deleteTodo: (id: string) => void;
     toggleTodo: (id: string) => void;
+    emptyReason?: EmptyReason;
   }
-  let { todos = $bindable(), openModal, deleteTodo, toggleTodo }: TodoListProps = $props();
+  let { todos = $bindable(), openModal, deleteTodo, toggleTodo, emptyReason = "empty" }: TodoListProps = $props();
+
+  const emptyMessages: Record<EmptyReason, string> = {
+    empty: "No todos yet. Add one!",
+    filter: "No todos match this filter.",
+    search: "No todos match your search.",
+  };
 </script>
 
 <div class="todo-container">
   {#if todos.length === 0}
-    <EmptyState text="Empty..." />
+    <EmptyState text={emptyMessages[emptyReason]} />
   {:else}
     <ul class="todo-list">
       {#each todos as todo, i (todo.id)}

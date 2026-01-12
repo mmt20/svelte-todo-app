@@ -5,3 +5,4 @@ export type Todo = {
 };
 
 export type Filter = "ALL" | "ACTIVE" | "COMPLETED";
+export type EmptyReason = "empty" | "filter" | "search";
