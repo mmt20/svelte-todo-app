@@ -1,22 +1,23 @@
 <script lang="ts">
+  import type { Todo } from "$lib/types";
   import { Trash, SquarePen } from "lucide-svelte";
-  let completed: boolean = false;
-  export let text: string = "NOTE #1  ";
+
+  let todo: Todo = $props();
 </script>
 
-<li class="todo-item" class:completed>
+<li class="todo-item" class:completed={todo.completed}>
   <label class="checkbox-wrapper">
     <input
       type="checkbox"
-      bind:checked={completed}
-      aria-checked={completed}
-      aria-label={`Mark "${text}" as completed`}
+      bind:checked={todo.completed}
+      aria-checked={todo.completed}
+      aria-label={`Mark ${todo.text} as completed`}
     />
     <span class="checkmark"></span>
-    <span class="sr-only">{text}</span>
+    <span class="sr-only">{todo.text}</span>
   </label>
 
-  <span class="todo-text">{text}</span>
+  <span class="todo-text">{todo.text}</span>
 
   <div class="actions">
     <button class="action-btn edit">

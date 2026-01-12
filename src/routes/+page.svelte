@@ -1,7 +1,15 @@
-<script>
+<script lang="ts">
   import FilterControls from "$lib/components/FilterControls.svelte";
   import SearchBar from "$lib/components/SearchBar.svelte";
   import TodoList from "$lib/components/TodoList.svelte";
+  import type { Todo } from "$lib/types";
+
+  // mock data
+  let todos = $state<Todo[]>([
+    { id: 1, text: "NOTE #1", completed: false },
+    { id: 2, text: "NOTE #2", completed: true },
+    { id: 3, text: "NOTE #3", completed: false },
+  ]);
 </script>
 
 <div class="app dark">
@@ -20,7 +28,7 @@
     </section>
 
     <section class="todo-list">
-      <TodoList />
+      <TodoList {...todos} />
     </section>
   </main>
 </div>

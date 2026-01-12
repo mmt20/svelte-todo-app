@@ -1,12 +1,16 @@
 <script lang="ts">
+  import type { Todo } from "$lib/types";
   import AddButton from "./AddButton.svelte";
   import TodoItem from "./TodoItem.svelte";
+
+  let todos: Todo[] = $props();
+  console.log(todos);
 </script>
 
 <ul class="todo-list">
-  <TodoItem />
-  <TodoItem />
-  <TodoItem />
+  {#each todos as todo (todo.id)}
+    <TodoItem {...todo} />
+  {/each}
 </ul>
 <AddButton />
 
