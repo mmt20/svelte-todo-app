@@ -3,8 +3,13 @@
   import AddButton from "./AddButton.svelte";
   import EmptyState from "./EmptyState.svelte";
   import TodoItem from "./TodoItem.svelte";
-
-  let { todos, openModal }: { todos: Todo[]; openModal: () => void } = $props();
+  interface TodoListProps {
+    todos: Todo[];
+    openModal: () => void;
+    deleteTodo: (id: string) => void;
+    toggleTodo: (id: string) => void;
+  }
+  let { todos, openModal, deleteTodo, toggleTodo }: TodoListProps = $props();
 </script>
 
 <div class="todo-container">
@@ -13,13 +18,13 @@
   {:else}
     <ul class="todo-list">
       {#each todos as todo (todo.id)}
-        <TodoItem {...todo} />
+        <TodoItem {todo} {deleteTodo} {toggleTodo} />
       {/each}
     </ul>
-    <div class="add-button-wrapper">
-      <AddButton onclick={openModal} />
-    </div>
   {/if}
+  <div class="add-button-wrapper">
+    <AddButton onclick={openModal} />
+  </div>
 </div>
 
 <style lang="scss">

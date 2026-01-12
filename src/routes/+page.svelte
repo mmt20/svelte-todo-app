@@ -41,6 +41,14 @@
 
     closeModal();
   }
+
+  function deleteTodo(id: string) {
+    todos = todos.filter((t) => t.id !== id);
+  }
+
+  function toggleTodo(id: string) {
+    todos = todos.map((t) => (t.id === id ? { ...t, completed: !t.completed } : t));
+  }
 </script>
 
 <div class="app">
@@ -59,7 +67,7 @@
     </section>
 
     <section class="todo-list">
-      <TodoList {todos} {openModal} />
+      <TodoList {todos} {openModal} {deleteTodo} {toggleTodo} />
     </section>
   </main>
   {#if showModal}

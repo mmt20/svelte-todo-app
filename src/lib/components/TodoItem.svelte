@@ -1,15 +1,19 @@
 <script lang="ts">
   import type { Todo } from "$lib/types";
   import { Trash, SquarePen } from "lucide-svelte";
-
-  let todo: Todo = $props();
+  interface TodoProps {
+    todo: Todo;
+    deleteTodo: (id: string) => void;
+    toggleTodo: (id: string) => void;
+  }
+  let { todo, deleteTodo, toggleTodo }: TodoProps = $props();
 </script>
 
 <li class="todo-item" class:completed={todo.completed}>
   <label class="checkbox-wrapper">
     <input
       type="checkbox"
-      bind:checked={todo.completed}
+      onchange={() => toggleTodo(todo.id)}
       aria-checked={todo.completed}
       aria-label={`Mark ${todo.text} as completed`}
     />
@@ -23,7 +27,7 @@
     <button class="action-btn edit">
       <SquarePen />
     </button>
-    <button class="action-btn delete">
+    <button class="action-btn delete" onclick={() => deleteTodo(todo.id)}>
       <Trash />
     </button>
   </div>
