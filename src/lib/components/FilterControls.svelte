@@ -13,7 +13,7 @@
   }: { todos: Todo[]; filteredTodos: Todo[]; searchQuery: string } = $props();
   let filter = $state<Filter>("ALL");
 
-  $effect(() => {
+  let computedFilteredTodos = $derived.by(() => {
     let result = todos;
 
     // Apply search filter
@@ -29,7 +29,11 @@
       result = result.filter((todo: Todo) => todo.completed);
     }
 
-    filteredTodos = result;
+    return result;
+  });
+
+  $effect(() => {
+    filteredTodos = computedFilteredTodos;
   });
 </script>
 
