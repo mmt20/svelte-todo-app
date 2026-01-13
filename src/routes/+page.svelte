@@ -1,12 +1,13 @@
 <script lang="ts">
-  import AddNewNoteModal from "$lib/components/AddNewNoteModal.svelte";
-  import FilterControls from "$lib/components/FilterControls.svelte";
+  import AddNewNoteModal from "$lib/components/modals/AddNewNoteModal.svelte";
+
+  import TodoList from "$lib/components/todo/TodoList.svelte";
   import SearchBar from "$lib/components/SearchBar.svelte";
-  import TodoList from "$lib/components/TodoList.svelte";
   import { theme } from "$lib/theme/theme.svelte";
   import type { EmptyReason, Todo } from "$lib/types";
   import { onMount } from "svelte";
   import { v4 as uuidv4 } from "uuid";
+  import FilterControls from "$lib/components/FilterControls.svelte";
 
   // Load theme from localStorage on mount
   onMount(() => {
