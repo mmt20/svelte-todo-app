@@ -3,6 +3,7 @@
   import TodoList from "$lib/components/todo/TodoList.svelte";
   import SearchBar from "$lib/components/SearchBar.svelte";
   import FilterControls from "$lib/components/FilterControls.svelte";
+  import AddButton from "$lib/components/AddButton.svelte";
   import { theme } from "$lib/theme/theme.svelte";
   import { todoStore } from "$lib/stores";
   import type { EmptyReason, Todo } from "$lib/types";
@@ -55,15 +56,18 @@
         <FilterControls todos={todoStore.todos} bind:filteredTodos {searchQuery} />
       </div>
     </section>
-    {#if todoStore.isLoaded === false}
-      <div class="loading-spinner">
-        <div class="spinner"></div>
+    <section class="todo-list">
+      {#if todoStore.isLoaded === false}
+        <div class="loading-spinner">
+          <div class="spinner"></div>
+        </div>
+      {:else}
+        <TodoList todos={filteredTodos} {emptyReason} />
+      {/if}
+      <div class="add-button-wrapper">
+        <AddButton onclick={openModal} />
       </div>
-    {:else}
-      <section class="todo-list">
-        <TodoList todos={filteredTodos} {openModal} {emptyReason} />
-      </section>
-    {/if}
+    </section>
   </main>
 
   {#if showModal}
@@ -178,5 +182,16 @@
     .controls {
       gap: 10px;
     }
+  }
+
+  .todo-list {
+    position: relative;
+    min-height: 400px;
+  }
+
+  .add-button-wrapper {
+    position: absolute;
+    bottom: 24px;
+    right: 24px;
   }
 </style>
