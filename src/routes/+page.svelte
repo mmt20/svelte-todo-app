@@ -1,30 +1,26 @@
 <script lang="ts">
   import AddNewNoteModal from "$lib/components/modals/AddNewNoteModal.svelte";
-
   import TodoList from "$lib/components/todo/TodoList.svelte";
   import SearchBar from "$lib/components/SearchBar.svelte";
+  import FilterControls from "$lib/components/FilterControls.svelte";
   import { theme } from "$lib/theme/theme.svelte";
+  import { todoStore } from "$lib/stores";
   import type { EmptyReason, Todo } from "$lib/types";
   import { onMount } from "svelte";
-  import { v4 as uuidv4 } from "uuid";
-  import FilterControls from "$lib/components/FilterControls.svelte";
 
-  // Load theme from localStorage on mount
+  // Initialize theme and load todos on mount
   onMount(() => {
     theme.init();
+    todoStore.load();
   });
-  // mock data
-  let todos = $state<Todo[]>([
-    { id: uuidv4(), text: "NOTE #1", completed: false },
-    { id: uuidv4(), text: "NOTE #2", completed: true },
-    { id: uuidv4(), text: "NOTE #3", completed: false },
-  ]);
 
   let filteredTodos = $state<Todo[]>([]);
   let searchQuery = $state("");
 
   // Determine empty reason
-  let emptyReason = $derived<EmptyReason>(todos.length === 0 ? "empty" : searchQuery.trim() ? "search" : "filter");
+  let emptyReason = $derived<EmptyReason>(
+    todoStore.todos.length === 0 ? "empty" : searchQuery.trim() ? "search" : "filter"
+  );
 
   let showModal = $state(false);
   let newNoteText = $state("");
@@ -40,18 +36,8 @@
   }
 
   function addNote() {
-    if (newNoteText.trim() === "") return;
-    todos = [...todos, { id: uuidv4(), text: newNoteText.trim(), completed: false }];
-
+    todoStore.add(newNoteText);
     closeModal();
-  }
-
-  function deleteTodo(id: string) {
-    todos = todos.filter((t) => t.id !== id);
-  }
-
-  function toggleTodo(id: string) {
-    todos = todos.map((t) => (t.id === id ? { ...t, completed: !t.completed } : t));
   }
 </script>
 
@@ -66,12 +52,12 @@
         <SearchBar bind:searchQuery />
       </div>
       <div class="filter-wrapper">
-        <FilterControls {todos} bind:filteredTodos {searchQuery} />
+        <FilterControls todos={todoStore.todos} bind:filteredTodos {searchQuery} />
       </div>
     </section>
 
     <section class="todo-list">
-      <TodoList bind:todos={filteredTodos} {openModal} {deleteTodo} {toggleTodo} {emptyReason} />
+      <TodoList todos={filteredTodos} {openModal} {emptyReason} />
     </section>
   </main>
   {#if showModal}

@@ -1,9 +1,11 @@
+import { STORAGE_KEYS } from "$lib/constants";
+
 function createThemeStore() {
   let darkMode = $state(false);
 
   function init() {
     if (typeof window !== "undefined") {
-      const saved = localStorage.getItem("darkMode");
+      const saved = localStorage.getItem(STORAGE_KEYS.DARK_MODE);
       darkMode = saved === "true";
       document.body.classList.toggle("dark", darkMode);
     }
@@ -11,7 +13,7 @@ function createThemeStore() {
 
   function toggle() {
     darkMode = !darkMode;
-    localStorage.setItem("darkMode", String(darkMode));
+    localStorage.setItem(STORAGE_KEYS.DARK_MODE, String(darkMode));
     document.body.classList.toggle("dark", darkMode);
   }
 

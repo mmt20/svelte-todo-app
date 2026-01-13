@@ -8,11 +8,9 @@
   interface TodoListProps {
     todos: Todo[];
     openModal: () => void;
-    deleteTodo: (id: string) => void;
-    toggleTodo: (id: string) => void;
     emptyReason?: EmptyReason;
   }
-  let { todos = $bindable(), openModal, deleteTodo, toggleTodo, emptyReason = "empty" }: TodoListProps = $props();
+  let { todos, openModal, emptyReason = "empty" }: TodoListProps = $props();
 </script>
 
 <div class="todo-container">
@@ -20,8 +18,8 @@
     <EmptyState text={EMPTY_MESSAGES[emptyReason]} />
   {:else}
     <ul class="todo-list">
-      {#each todos as todo, i (todo.id)}
-        <TodoItem bind:todo={todos[i]} {deleteTodo} {toggleTodo} />
+      {#each todos as todo (todo.id)}
+        <TodoItem {todo} />
       {/each}
     </ul>
   {/if}

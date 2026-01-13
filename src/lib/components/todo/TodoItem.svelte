@@ -1,12 +1,12 @@
 <script lang="ts">
   import type { Todo } from "$lib/types";
+  import { todoStore } from "$lib/stores";
   import { Trash, SquarePen, Check, X } from "lucide-svelte";
+
   interface TodoProps {
     todo: Todo;
-    deleteTodo: (id: string) => void;
-    toggleTodo: (id: string) => void;
   }
-  let { todo = $bindable(), deleteTodo, toggleTodo }: TodoProps = $props();
+  let { todo }: TodoProps = $props();
 
   let isEditing = $state(false);
   let editText = $state("");
@@ -18,7 +18,7 @@
 
   function saveEdit() {
     if (editText.trim()) {
-      todo.text = editText.trim();
+      todoStore.update(todo.id, editText.trim());
     }
     isEditing = false;
   }
@@ -33,7 +33,8 @@
   <label class="checkbox-wrapper">
     <input
       type="checkbox"
-      onchange={() => toggleTodo(todo.id)}
+      checked={todo.completed}
+      onchange={() => todoStore.toggle(todo.id)}
       aria-checked={todo.completed}
       aria-label={`Mark ${todo.text} as completed`}
     />
@@ -67,7 +68,7 @@
       <button class="action-btn edit" onclick={startEditing} aria-label="Edit">
         <SquarePen />
       </button>
-      <button class="action-btn delete" onclick={() => deleteTodo(todo.id)} aria-label="Delete">
+      <button class="action-btn delete" onclick={() => todoStore.delete(todo.id)} aria-label="Delete">
         <Trash />
       </button>
     {/if}
