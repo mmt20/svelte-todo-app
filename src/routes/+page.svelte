@@ -11,11 +11,7 @@
 
   // Load theme from localStorage on mount
   onMount(() => {
-    const savedTheme = localStorage.getItem("darkMode");
-    if (savedTheme) {
-      theme.darkMode = savedTheme === "true";
-    }
-    window.document.body.classList.toggle("dark", theme.darkMode);
+    theme.init();
   });
   // mock data
   let todos = $state<Todo[]>([

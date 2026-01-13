@@ -4,9 +4,7 @@
   import { Moon, Sun } from "lucide-svelte";
 
   function toggle() {
-    theme.darkMode = !theme.darkMode;
-    localStorage.setItem("darkMode", String(theme.darkMode));
-    window.document.body.classList.toggle("dark", theme.darkMode);
+    theme.toggle();
   }
   let {
     todos,
