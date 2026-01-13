@@ -8,6 +8,7 @@
   import { todoStore } from "$lib/stores";
   import type { EmptyReason, Todo } from "$lib/types";
   import { onMount } from "svelte";
+  import TodoListSkeleton from "$lib/components/todo/TodoListSkeleton.svelte";
 
   // Initialize theme and load todos on mount
   onMount(() => {
@@ -58,9 +59,7 @@
     </section>
     <section class="todo-list">
       {#if todoStore.isLoaded === false}
-        <div class="loading-spinner">
-          <div class="spinner"></div>
-        </div>
+        <TodoListSkeleton count={3} />
       {:else}
         <TodoList todos={filteredTodos} {emptyReason} />
       {/if}
@@ -76,30 +75,6 @@
 </div>
 
 <style lang="scss">
-  .loading-spinner {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 200px;
-
-    .spinner {
-      border: 6px solid var(--accent-primary);
-      border-top: 6px solid var(--text-primary);
-      border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      animation: spin 1s linear infinite;
-
-      @keyframes spin {
-        0% {
-          transform: rotate(0deg);
-        }
-        100% {
-          transform: rotate(360deg);
-        }
-      }
-    }
-  }
   .app {
     background-color: var(--bg-primary);
     padding: 32px 16px;
