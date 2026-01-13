@@ -162,6 +162,7 @@
   .todo-list {
     position: relative;
     min-height: 400px;
+    padding-bottom: 80px;
   }
 
   .add-button-wrapper {
