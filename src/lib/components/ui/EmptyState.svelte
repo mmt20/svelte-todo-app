@@ -23,7 +23,7 @@
     }
 
     p {
-      color: var(--text);
+      color: var(--text-primary);
     }
   }
 </style>

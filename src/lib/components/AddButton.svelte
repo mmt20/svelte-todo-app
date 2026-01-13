@@ -12,11 +12,11 @@
   .fab {
     width: 56px;
     height: 56px;
-    background-color: var(--accent);
+    background-color: var(--accent-primary);
     border: none;
     border-radius: 50%;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    color: var(--white-text);
+    color: var(--text-white);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -27,7 +27,7 @@
 
     &:hover {
       background-color: var(--accent-hover);
-      box-shadow: 0 4px 8px var(--shadow-prim);
+      box-shadow: 0 4px 8px var(--accent-shadow);
     }
   }
 </style>

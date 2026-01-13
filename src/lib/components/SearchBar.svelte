@@ -1,6 +1,7 @@
 <script lang="ts">
   import { Search } from "lucide-svelte";
   import debounce from "../../util";
+
   let { searchQuery = $bindable("") }: { searchQuery: string } = $props();
   let inputValue = $state(searchQuery);
 
@@ -32,10 +33,10 @@
     input {
       width: 100%;
       padding: 12px 16px 12px 12px;
-      border: 2px solid var(--border);
+      border: 2px solid var(--border-primary);
       border-radius: 8px;
       appearance: none;
-      background-color: var(--white-text);
+      background-color: var(--text-white);
       color: var(--text-dark);
       &::-webkit-search-cancel-button {
         -webkit-appearance: none;
@@ -43,8 +44,8 @@
       }
       &:focus {
         outline: none;
-        border-color: var(--accent);
-        box-shadow: 0 0 0 3px var(--shadow-prim);
+        border-color: var(--accent-primary);
+        box-shadow: 0 0 0 3px var(--accent-shadow);
       }
     }
 
@@ -54,11 +55,11 @@
       background: none;
       border: none;
       padding: 8px;
-      color: var(--border);
+      color: var(--border-primary);
       cursor: pointer;
 
       &:hover {
-        color: var(--accent);
+        color: var(--accent-primary);
       }
     }
   }

@@ -61,19 +61,19 @@
 
   .filter-select {
     padding: 8px 12px;
-    border: 2px solid var(--accent);
+    border: 2px solid var(--accent-primary);
     border-radius: 8px;
     font-weight: 600;
     font-size: 14px;
-    color: var(--text);
+    color: var(--text-primary);
     cursor: pointer;
     transition: all 0.3s ease;
-    background-color: var(--accent);
-    color: var(--white-text);
+    background-color: var(--accent-primary);
+    color: var(--text-white);
 
     option {
-      background-color: var(--accent);
-      color: var(--white-text);
+      background-color: var(--accent-primary);
+      color: var(--text-white);
     }
 
     &:hover {
@@ -82,7 +82,7 @@
 
     &:focus {
       outline: none;
-      border-color: var(--accent);
+      border-color: var(--accent-primary);
       box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.1);
     }
   }
@@ -91,12 +91,12 @@
     align-items: center;
     justify-content: center;
     padding: 8px;
-    border: 2px solid var(--border);
+    border: 2px solid var(--border-primary);
     border-radius: 8px;
-    background-color: var(--accent);
+    background-color: var(--accent-primary);
     cursor: pointer;
     transition: all 0.3s ease;
-    color: var(--white-text);
+    color: var(--text-white);
     &:hover {
       border-color: var(--accent-hover);
     }

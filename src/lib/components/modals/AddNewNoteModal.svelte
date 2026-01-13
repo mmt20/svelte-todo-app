@@ -37,10 +37,10 @@
   .modal {
     display: flex;
     flex-direction: column;
-    background-color: var(--surface);
+    background-color: var(--bg-surface);
     padding: 36px 32px 28px;
     border-radius: 20px;
-    box-shadow: 0 10px 30px var(--shadow-prim);
+    box-shadow: 0 10px 30px var(--accent-shadow);
     width: 90%;
     max-width: 420px;
     min-height: 360px;
@@ -56,7 +56,7 @@
     margin-top: 0;
     margin-bottom: 16px;
     font-size: 24px;
-    color: var(--text);
+    color: var(--text-primary);
     text-align: center;
     @media (max-width: 480px) {
       font-size: 20px;
@@ -67,15 +67,15 @@
     width: 100%;
     padding: 14px 16px;
     margin-bottom: 24px;
-    border: 2px solid var(--border);
+    border: 2px solid var(--border-primary);
     border-radius: 8px;
     font-size: 16px;
     box-sizing: border-box;
 
     &:focus {
       outline: none;
-      border-color: var(--accent);
-      box-shadow: 0 0 0 3px rgba(var(--accent-hover-rgb), 0.1);
+      border-color: var(--accent-primary);
+      box-shadow: 0 0 0 3px var(--accent-shadow);
     }
   }
 
@@ -97,20 +97,20 @@
 
     &.btn-cancel {
       background: transparent;
-      border: 2px solid var(--accent);
-      color: var(--accent);
+      border: 2px solid var(--accent-primary);
+      color: var(--accent-primary);
       padding: 10px 20px;
       font-weight: 600;
       border-radius: 6px;
       &:hover {
         background-color: var(--accent-hover);
-        color: var(--text);
+        color: var(--text-primary);
       }
     }
 
     &.btn-apply {
-      background-color: var(--accent);
-      color: var(--white-text);
+      background-color: var(--accent-primary);
+      color: var(--text-white);
       padding: 10px 24px;
       font-weight: 600;
       border-radius: 6px;

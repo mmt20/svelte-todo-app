@@ -82,25 +82,25 @@
     gap: 16px;
     padding: 8px 12px;
 
-    border-bottom: 2px solid var(--border);
+    border-bottom: 2px solid var(--border-primary);
     transition: border-color 0.2s ease;
     &:last-child {
       border-bottom: none;
     }
     &:hover,
     &:focus-within {
-      border-color: var(--accent);
+      border-color: var(--accent-primary);
     }
 
     &.completed {
       .todo-text {
         text-decoration: line-through;
-        color: var(--muted);
+        color: var(--text-secondary);
       }
 
       .checkmark {
-        background: var(--accent);
-        border-color: var(--accent);
+        background: var(--accent-primary);
+        border-color: var(--accent-primary);
 
         &::after {
           opacity: 1;
@@ -140,7 +140,7 @@
     .checkmark {
       width: 22px;
       height: 22px;
-      border: 2px solid var(--border);
+      border: 2px solid var(--border-primary);
       background: transparent;
       position: relative;
       transition:
@@ -155,7 +155,7 @@
         top: 2px;
         width: 6px;
         height: 12px;
-        border: solid #fff;
+        border: solid var(--text-white);
         border-width: 0 2.5px 2.5px 0;
         transform: rotate(45deg);
         opacity: 0;
@@ -163,7 +163,7 @@
     }
 
     &:hover .checkmark {
-      border-color: var(--accent);
+      border-color: var(--accent-primary);
     }
 
     &:active .checkmark {
@@ -171,7 +171,7 @@
     }
 
     input:focus-visible ~ .checkmark {
-      outline: 3px solid var(--accent);
+      outline: 3px solid var(--accent-primary);
       outline-offset: 2px;
       transform: scale(1.05);
     }
@@ -182,7 +182,7 @@
     font-size: 16px;
     font-weight: 500;
     line-height: 1.4;
-    color: var(--text);
+    color: var(--text-primary);
     word-break: break-word;
     transition:
       color 0.2s ease,
@@ -203,15 +203,15 @@
   .edit-input {
     flex: 1;
     padding: 8px;
-    border: 2px solid var(--accent);
+    border: 2px solid var(--accent-primary);
     border-radius: 6px;
     font-size: 16px;
-    background: white;
-    color: #2c3e50;
+    background: var(--bg-input);
+    color: var(--text-input);
 
     &:focus {
       outline: none;
-      box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.1);
+      box-shadow: 0 0 0 3px var(--accent-shadow);
     }
   }
   .action-btn {
@@ -224,7 +224,7 @@
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
-    color: #666;
+    color: var(--neutral-primary);
 
     &:hover,
     &:focus {
@@ -233,24 +233,24 @@
 
     &.edit:hover,
     &.edit:focus {
-      color: #6c63ff;
-      background: rgba(108, 99, 255, 0.1);
+      color: var(--info-primary);
+      background: var(--info-bg);
     }
 
     &.delete:hover,
     &.delete:focus {
-      color: #ff6b6b;
-      background: rgba(255, 107, 107, 0.1);
+      color: var(--danger-primary);
+      background: var(--danger-bg);
     }
     &.save:hover,
     &.save:focus {
-      color: #51cf66;
-      background: rgba(81, 207, 102, 0.1);
+      color: var(--success-primary);
+      background: var(--success-bg);
     }
     &.cancel:hover,
     &.cancel:focus {
-      color: #ff6b6b;
-      background: rgba(255, 107, 107, 0.1);
+      color: var(--danger-primary);
+      background: var(--danger-bg);
     }
   }
 

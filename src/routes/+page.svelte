@@ -79,8 +79,8 @@
     height: 200px;
 
     .spinner {
-      border: 6px solid var(--accent);
-      border-top: 6px solid var(--text);
+      border: 6px solid var(--accent-primary);
+      border-top: 6px solid var(--text-primary);
       border-radius: 50%;
       width: 40px;
       height: 40px;
@@ -97,7 +97,7 @@
     }
   }
   .app {
-    background-color: var(--bg);
+    background-color: var(--bg-primary);
     padding: 32px 16px;
     min-height: 100vh;
     display: flex;
@@ -119,7 +119,7 @@
       margin: 0;
       font-weight: 700;
       letter-spacing: 2px;
-      color: var(--text);
+      color: var(--text-primary);
     }
   }
 
