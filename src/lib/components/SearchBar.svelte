@@ -1,10 +1,21 @@
 <script lang="ts">
   import { Search } from "lucide-svelte";
+  import debounce from "../../util";
   let { searchQuery = $bindable("") }: { searchQuery: string } = $props();
+  let inputValue = $state(searchQuery);
+
+  const debouncedUpdate = debounce((value: string) => {
+    searchQuery = value;
+  }, 300);
+
+  function handleInput(e: Event) {
+    inputValue = (e.target as HTMLInputElement).value;
+    debouncedUpdate(inputValue);
+  }
 </script>
 
 <form class="search-bar" role="search" onsubmit={(e) => e.preventDefault()}>
-  <input id="search" type="search" placeholder="Search notes…" bind:value={searchQuery} />
+  <input id="search" type="search" placeholder="Search notes…" value={searchQuery} oninput={handleInput} />
   <button type="submit" class="search-btn" aria-label="Search">
     <Search />
   </button>
