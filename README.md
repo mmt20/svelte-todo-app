@@ -94,7 +94,7 @@ Dark mode is applied immediately via an inline script in `app.html` before the p
 
 ```javascript
 const darkMode = localStorage.getItem("darkMode") === "true";
-if (darkMode) document.documentElement.classList.add("dark");
+if (darkMode) document.body.classList.add("dark");
 ```
 
 ### LocalStorage Persistence
