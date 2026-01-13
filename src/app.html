@@ -12,7 +12,7 @@
       (function () {
         try {
           const darkMode = localStorage.getItem("darkMode") === "true";
-          if (darkMode) document.documentElement.classList.add("dark");
+          if (darkMode) document.body.classList.add("dark");
         } catch (e) {
           console.warn("Dark mode initialization skipped:", e);
         }
