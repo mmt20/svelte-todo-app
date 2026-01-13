@@ -55,17 +55,47 @@
         <FilterControls todos={todoStore.todos} bind:filteredTodos {searchQuery} />
       </div>
     </section>
-
-    <section class="todo-list">
-      <TodoList todos={filteredTodos} {openModal} {emptyReason} />
-    </section>
+    {#if todoStore.isLoaded === false}
+      <div class="loading-spinner">
+        <div class="spinner"></div>
+      </div>
+    {:else}
+      <section class="todo-list">
+        <TodoList todos={filteredTodos} {openModal} {emptyReason} />
+      </section>
+    {/if}
   </main>
+
   {#if showModal}
     <AddNewNoteModal {closeModal} {addNote} bind:value={newNoteText} />
   {/if}
 </div>
 
 <style lang="scss">
+  .loading-spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+
+    .spinner {
+      border: 6px solid var(--accent);
+      border-top: 6px solid var(--text);
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    }
+  }
   .app {
     background-color: var(--bg);
     padding: 32px 16px;

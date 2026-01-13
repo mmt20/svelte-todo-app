@@ -2,9 +2,9 @@ import { v4 as uuidv4 } from "uuid";
 import type { Todo } from "$lib/types";
 import { STORAGE_KEYS } from "$lib/constants";
 
-
 function createTodoStore() {
   let todos = $state<Todo[]>([]);
+  let isLoaded = $state(false);
 
   // Load from localStorage
   function load() {
@@ -13,6 +13,7 @@ function createTodoStore() {
       if (saved) {
         todos = JSON.parse(saved);
       }
+      isLoaded = true;
     }
   }
 
@@ -26,6 +27,9 @@ function createTodoStore() {
   return {
     get todos() {
       return todos;
+    },
+    get isLoaded() {
+      return isLoaded;
     },
 
     add(text: string) {
