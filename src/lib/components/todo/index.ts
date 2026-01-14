@@ -1,4 +1,5 @@
 import TodoItem from "./TodoItem.svelte";
 import TodoList from "./TodoList.svelte";
+import TodoListSkeleton from "./TodoListSkeleton.svelte";
 
-export { TodoItem, TodoList };
+export { TodoItem, TodoList, TodoListSkeleton };
