@@ -1,63 +1,41 @@
 <script lang="ts">
+  import Modal from "$lib/components/ui/Modal.svelte";
+  import Button from "$lib/components/ui/Button.svelte";
+
   let {
     closeModal,
     addNote,
     value = $bindable(""),
-  }: { closeModal: () => void; addNote: () => void; value: string } = $props();
+  }: {
+    closeModal: () => void;
+    addNote: () => void;
+    value: string;
+  } = $props();
 </script>
 
-<!-- svelte-ignore a11y_click_events_have_key_events -->
-<!-- svelte-ignore a11y_no_static_element_interactions -->
-<div class="modal-backdrop" onclick={closeModal}>
-  <div class="modal" onclick={(e) => e.stopPropagation()}>
-    <h2>NEW NOTE</h2>
+<Modal onClose={closeModal}>
+  {#snippet header()}
+    <h2 class="title">Add New Note</h2>
+  {/snippet}
+
+  {#snippet body()}
     <input type="text" placeholder="Input your note..." bind:value />
-    <div class="modal-actions">
-      <button class="btn btn-cancel" onclick={closeModal}> CANCEL </button>
-      <button class="btn btn-apply" onclick={addNote}> APPLY </button>
-    </div>
-  </div>
-</div>
+  {/snippet}
+
+  {#snippet footer()}
+    <Button variant="outline" onclick={closeModal}>Cancel</Button>
+
+    <Button variant="primary" onclick={addNote}>Apply</Button>
+  {/snippet}
+</Modal>
 
 <style lang="scss">
-  .modal-backdrop {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(4px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-  }
-
-  .modal {
-    display: flex;
-    flex-direction: column;
-    background-color: var(--bg-surface);
-    padding: 36px 32px 28px;
-    border-radius: 20px;
-    box-shadow: 0 10px 30px var(--accent-shadow);
-    width: 90%;
-    max-width: 420px;
-    min-height: 360px;
-    box-sizing: border-box;
-
-    @media (max-width: 480px) {
-      padding: 24px;
-      width: 95%;
-    }
-  }
-
-  h2 {
-    margin-top: 0;
-    margin-bottom: 16px;
+  .title {
+    margin: 0 0 16px;
     font-size: 24px;
     color: var(--text-primary);
     text-align: center;
+
     @media (max-width: 480px) {
       font-size: 20px;
     }
@@ -66,7 +44,6 @@
   input[type="text"] {
     width: 100%;
     padding: 14px 16px;
-    margin-bottom: 24px;
     border: 2px solid var(--border-primary);
     border-radius: 8px;
     font-size: 16px;
@@ -79,45 +56,33 @@
     }
   }
 
-  .modal-actions {
-    margin-top: auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 16px;
-  }
-
   .btn {
-    padding: 8px 16px;
-    border: none;
-    border-radius: 4px;
+    padding: 10px 20px;
+    border-radius: 6px;
     font-size: 16px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    font-weight: 600;
+    border: none;
+    transition: background-color 0.2s ease;
+  }
 
-    &.btn-cancel {
-      background: transparent;
-      border: 2px solid var(--accent-primary);
-      color: var(--accent-primary);
-      padding: 10px 20px;
-      font-weight: 600;
-      border-radius: 6px;
-      &:hover {
-        background-color: var(--accent-hover);
-        color: var(--text-primary);
-      }
+  .btn-cancel {
+    background: transparent;
+    border: 2px solid var(--accent-primary);
+    color: var(--accent-primary);
+
+    &:hover {
+      background-color: var(--accent-hover);
+      color: var(--text-primary);
     }
+  }
 
-    &.btn-apply {
-      background-color: var(--accent-primary);
-      color: var(--text-white);
-      padding: 10px 24px;
-      font-weight: 600;
-      border-radius: 6px;
+  .btn-apply {
+    background-color: var(--accent-primary);
+    color: var(--text-white);
 
-      &:hover {
-        background-color: var(--accent-hover);
-      }
+    &:hover {
+      background-color: var(--accent-hover);
     }
   }
 </style>
