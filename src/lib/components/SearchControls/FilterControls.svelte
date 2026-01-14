@@ -2,7 +2,7 @@
   import { theme } from "$lib/theme/theme.svelte";
   import type { Filter, Todo } from "$lib/types";
   import { Moon, Sun } from "lucide-svelte";
-  import Button from "./ui/Button.svelte";
+  import Button from "../ui/Button.svelte";
 
   function toggleTheme() {
     theme.toggle();

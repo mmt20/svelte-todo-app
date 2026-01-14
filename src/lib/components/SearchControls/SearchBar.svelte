@@ -1,8 +1,7 @@
 <script lang="ts">
   import { Search } from "lucide-svelte";
-  import debounce from "../../util";
-  import Button from "./ui/Button.svelte";
-
+  import { debounce } from "../../../util";
+  import Button from "../ui/Button.svelte";
   let { searchQuery = $bindable("") }: { searchQuery: string } = $props();
   let inputValue = $state(searchQuery);
 
