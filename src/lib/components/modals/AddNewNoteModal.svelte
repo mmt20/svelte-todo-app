@@ -25,7 +25,7 @@
   {#snippet footer()}
     <Button variant="outline" onclick={closeModal}>Cancel</Button>
 
-    <Button variant="primary" onclick={addNote}>Apply</Button>
+    <Button variant="default" onclick={addNote}>Apply</Button>
   {/snippet}
 </Modal>
 
@@ -53,36 +53,6 @@
       outline: none;
       border-color: var(--accent-primary);
       box-shadow: 0 0 0 3px var(--accent-shadow);
-    }
-  }
-
-  .btn {
-    padding: 10px 20px;
-    border-radius: 6px;
-    font-size: 16px;
-    cursor: pointer;
-    font-weight: 600;
-    border: none;
-    transition: background-color 0.2s ease;
-  }
-
-  .btn-cancel {
-    background: transparent;
-    border: 2px solid var(--accent-primary);
-    color: var(--accent-primary);
-
-    &:hover {
-      background-color: var(--accent-hover);
-      color: var(--text-primary);
-    }
-  }
-
-  .btn-apply {
-    background-color: var(--accent-primary);
-    color: var(--text-white);
-
-    &:hover {
-      background-color: var(--accent-hover);
     }
   }
 </style>

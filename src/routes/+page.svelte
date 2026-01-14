@@ -65,7 +65,7 @@
         <TodoList todos={filteredTodos} {emptyReason} />
       {/if}
       <div class="add-button-wrapper">
-        <Button variant="icon" onclick={openModal}>
+        <Button variant="default" size="icon-lg" rounded="rounded-full" onclick={openModal}>
           <Plus aria-hidden="true" />
         </Button>
       </div>

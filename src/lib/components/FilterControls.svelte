@@ -2,8 +2,9 @@
   import { theme } from "$lib/theme/theme.svelte";
   import type { Filter, Todo } from "$lib/types";
   import { Moon, Sun } from "lucide-svelte";
+  import Button from "./ui/Button.svelte";
 
-  function toggle() {
+  function toggleTheme() {
     theme.toggle();
   }
   let {
@@ -44,13 +45,13 @@
     <option value="INCOMPLETE">Incomplete</option>
   </select>
 
-  <button class="theme-toggle" aria-label="Toggle theme" onclick={toggle}>
+  <Button onclick={toggleTheme} type="button" size="default" aria-label="Toggle Theme">
     {#if theme.darkMode}
       <Sun />
     {:else}
       <Moon />
     {/if}
-  </button>
+  </Button>
 </div>
 
 <style lang="scss">
@@ -86,27 +87,6 @@
       box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.1);
     }
   }
-  .theme-toggle {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 8px;
-    border: 2px solid var(--border-primary);
-    border-radius: 8px;
-    background-color: var(--accent-primary);
-    cursor: pointer;
-    transition: all 0.3s ease;
-    color: var(--text-white);
-    &:hover {
-      border-color: var(--accent-hover);
-    }
-
-    &:focus {
-      outline: none;
-
-      box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.1);
-    }
-  }
 
   @media (max-width: 768px) {
     .filter-group {
@@ -137,15 +117,6 @@
         padding: 6px 8px;
       }
     }
-
-    .theme-toggle {
-      padding: 7px;
-
-      :global(svg) {
-        width: 18px;
-        height: 18px;
-      }
-    }
   }
 
   @media (max-width: 360px) {
@@ -157,15 +128,6 @@
       option {
         font-size: 11px;
         padding: 5px 6px;
-      }
-    }
-
-    .theme-toggle {
-      padding: 6px;
-
-      :global(svg) {
-        width: 16px;
-        height: 16px;
       }
     }
   }

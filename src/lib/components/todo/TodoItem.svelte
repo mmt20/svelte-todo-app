@@ -2,6 +2,7 @@
   import type { Todo } from "$lib/types";
   import { todoStore } from "$lib/stores";
   import { Trash, SquarePen, Check, X } from "lucide-svelte";
+  import Button from "../ui/Button.svelte";
 
   interface TodoProps {
     todo: Todo;
@@ -58,19 +59,25 @@
 
   <div class="actions">
     {#if isEditing}
-      <button class="action-btn save" onclick={saveEdit} aria-label="Save">
+      <Button variant="success" size="icon" rounded="rounded-md" onclick={saveEdit} aria-label="Save">
         <Check />
-      </button>
-      <button class="action-btn cancel" onclick={cancelEdit} aria-label="Cancel">
+      </Button>
+      <Button variant="cancel" size="icon" rounded="rounded-md" onclick={cancelEdit} aria-label="Cancel">
         <X />
-      </button>
+      </Button>
     {:else}
-      <button class="action-btn edit" onclick={startEditing} aria-label="Edit">
+      <Button variant="ghost" size="icon" rounded="rounded-md" onclick={startEditing} aria-label="Edit">
         <SquarePen />
-      </button>
-      <button class="action-btn delete" onclick={() => todoStore.delete(todo.id)} aria-label="Delete">
+      </Button>
+      <Button
+        variant="cancel"
+        size="icon"
+        rounded="rounded-md"
+        onclick={() => todoStore.delete(todo.id)}
+        aria-label="Delete"
+      >
         <Trash />
-      </button>
+      </Button>
     {/if}
   </div>
 </li>
@@ -214,45 +221,6 @@
       box-shadow: 0 0 0 3px var(--accent-shadow);
     }
   }
-  .action-btn {
-    padding: 8px;
-    background: transparent;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-    color: var(--neutral-primary);
-
-    &:hover,
-    &:focus {
-      outline: none;
-    }
-
-    &.edit:hover,
-    &.edit:focus {
-      color: var(--info-primary);
-      background: var(--info-bg);
-    }
-
-    &.delete:hover,
-    &.delete:focus {
-      color: var(--danger-primary);
-      background: var(--danger-bg);
-    }
-    &.save:hover,
-    &.save:focus {
-      color: var(--success-primary);
-      background: var(--success-bg);
-    }
-    &.cancel:hover,
-    &.cancel:focus {
-      color: var(--danger-primary);
-      background: var(--danger-bg);
-    }
-  }
 
   @media (max-width: 768px) {
     .todo-item {
@@ -266,10 +234,6 @@
 
     .actions {
       opacity: 1;
-    }
-
-    .action-btn {
-      padding: 6px;
     }
   }
 
@@ -296,15 +260,6 @@
           width: 5px;
           height: 10px;
         }
-      }
-    }
-
-    .action-btn {
-      padding: 6px;
-
-      :global(svg) {
-        width: 16px;
-        height: 16px;
       }
     }
   }
