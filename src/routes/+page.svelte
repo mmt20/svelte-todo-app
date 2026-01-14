@@ -3,12 +3,13 @@
   import TodoList from "$lib/components/todo/TodoList.svelte";
   import SearchBar from "$lib/components/SearchBar.svelte";
   import FilterControls from "$lib/components/FilterControls.svelte";
-  import AddButton from "$lib/components/AddButton.svelte";
   import { theme } from "$lib/theme/theme.svelte";
   import { todoStore } from "$lib/stores";
   import type { EmptyReason, Todo } from "$lib/types";
   import { onMount } from "svelte";
   import TodoListSkeleton from "$lib/components/todo/TodoListSkeleton.svelte";
+  import Button from "$lib/components/ui/Button.svelte";
+  import { Plus } from "lucide-svelte";
 
   // Initialize theme and load todos on mount
   onMount(() => {
@@ -64,7 +65,9 @@
         <TodoList todos={filteredTodos} {emptyReason} />
       {/if}
       <div class="add-button-wrapper">
-        <AddButton onclick={openModal} />
+        <Button variant="icon" onclick={openModal}>
+          <Plus aria-hidden="true" />
+        </Button>
       </div>
     </section>
   </main>
