@@ -57,14 +57,17 @@ src/
 │   ├── components/          # Feature-organized components
 │   │   ├── modals/          # Modal components
 │   │   │   └── AddNewNoteModal.svelte
+│   │   ├── SearchControls/  # Search and Filter functionality
+│   │   │   ├── FilterControls.svelte
+│   │   │   └── SearchBar.svelte
 │   │   ├── todo/            # Todo-specific components
 │   │   │   ├── TodoItem.svelte
-│   │   │   └── TodoList.svelte
-│   │   ├── ui/              # Reusable UI components
-│   │   │   └── EmptyState.svelte
-│   │   ├── AddButton.svelte
-│   │   ├── FilterControls.svelte
-│   │   └── SearchBar.svelte
+│   │   │   ├── TodoList.svelte
+│   │   │   └── TodoListSkeleton.svelte
+│   │   └── ui/              # Reusable UI components
+│   │       ├── Button.svelte
+│   │       ├── EmptyState.svelte
+│   │       └── Modal.svelte
 │   ├── stores/              # Svelte 5 state stores
 │   │   └── todos.svelte.ts  # Todo state with localStorage persistence
 │   ├── theme/               # Theme management
@@ -77,6 +80,7 @@ src/
 ├── util/                    # Utility functions
 │   └── debounce.ts          # Debounce utility for search optimization
 ├── routes/
+│   ├── +layout.svelte       # Root layout
 │   └── +page.svelte         # Main application page
 ├── app.html                 # HTML template with FOUC prevention
 └── app.scss                 # Global styles
