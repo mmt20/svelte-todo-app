@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { Snippet } from "svelte";
+  import { fade, scale } from "svelte/transition";
 
   let {
     onClose,
@@ -16,8 +17,8 @@
 
 <!-- svelte-ignore a11y_click_events_have_key_events -->
 <!-- svelte-ignore a11y_no_static_element_interactions -->
-<div class="modal-backdrop" onclick={onClose}>
-  <div class="modal" onclick={(e) => e.stopPropagation()}>
+<div class="modal-backdrop" onclick={onClose} transition:fade={{ duration: 200 }}>
+  <div class="modal" onclick={(e) => e.stopPropagation()} transition:scale={{ duration: 300, start: 0.9, opacity: 0 }}>
     {#if header}
       <div class="modal-header">
         {@render header()}
