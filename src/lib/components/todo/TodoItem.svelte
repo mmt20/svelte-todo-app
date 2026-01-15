@@ -2,6 +2,7 @@
   import type { Todo } from "$lib/types";
   import { todoStore } from "$lib/stores";
   import { Trash, SquarePen, Check, X } from "lucide-svelte";
+  import { slide, fade, fly, scale } from "svelte/transition";
   import Button from "../ui/Button.svelte";
 
   interface TodoProps {
@@ -30,7 +31,7 @@
   }
 </script>
 
-<li class="todo-item" class:completed={todo.completed}>
+<li class="todo-item" class:completed={todo.completed} in:scale={{ duration: 400 }} out:scale={{ duration: 300 }}>
   <label class="checkbox-wrapper">
     <input
       type="checkbox"
@@ -48,6 +49,7 @@
       type="text"
       class="edit-input"
       bind:value={editText}
+      in:fade={{ duration: 300 }}
       onkeydown={(e) => {
         if (e.key === "Enter") saveEdit();
         if (e.key === "Escape") cancelEdit();
@@ -88,15 +90,19 @@
     align-items: center;
     gap: 16px;
     padding: 8px 12px;
-
     border-bottom: 2px solid var(--border-primary);
     transition: border-color 0.2s ease;
+
     &:last-child {
       border-bottom: none;
     }
+
     &:hover,
     &:focus-within {
       border-color: var(--accent-primary);
+    }
+    &:last-child:hover {
+      border-bottom: 2px solid var(--accent-primary);
     }
 
     &.completed {

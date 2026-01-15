@@ -1,6 +1,7 @@
 <script lang="ts">
   import { EMPTY_MESSAGES } from "$lib/constants";
   import type { EmptyReason, Todo } from "$lib/types";
+  import { fade, fly, scale } from "svelte/transition";
   import EmptyState from "../ui/EmptyState.svelte";
   import TodoItem from "./TodoItem.svelte";
 
@@ -13,9 +14,11 @@
 
 <div class="todo-container">
   {#if todos.length === 0}
-    <EmptyState text={EMPTY_MESSAGES[emptyReason]} />
+    <div class="empty-state" in:scale={{ duration: 600 }}>
+      <EmptyState text={EMPTY_MESSAGES[emptyReason]} />
+    </div>
   {:else}
-    <ul class="todo-list">
+    <ul class="todo-list" in:fly={{ y: -20, duration: 150 }} out:fade={{ duration: 200 }}>
       {#each todos as todo (todo.id)}
         <TodoItem {todo} />
       {/each}
