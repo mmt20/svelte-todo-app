@@ -13,12 +13,56 @@
     body?: Snippet;
     footer?: Snippet;
   } = $props();
+
+  let modalEl: HTMLDivElement | null = null;
+
+  function handleBackdropClick(e: MouseEvent) {
+    if (e.target === e.currentTarget) {
+      onClose();
+    }
+  }
+
+  function handleBackdropKeydown(e: KeyboardEvent) {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      onClose();
+    }
+  }
+
+  function handleEscape(e: KeyboardEvent) {
+    if (e.key === "Escape") {
+      onClose();
+    }
+  }
+
+  // Svelte 5 lifecycle
+  $effect(() => {
+    modalEl?.focus();
+
+    window.addEventListener("keydown", handleEscape);
+    return () => window.removeEventListener("keydown", handleEscape);
+  });
 </script>
 
-<!-- svelte-ignore a11y_click_events_have_key_events -->
-<!-- svelte-ignore a11y_no_static_element_interactions -->
-<div class="modal-backdrop" onclick={onClose} transition:fade={{ duration: 200 }}>
-  <div class="modal" onclick={(e) => e.stopPropagation()} transition:scale={{ duration: 300, start: 0.9, opacity: 0 }}>
+<div
+  class="modal-backdrop"
+  role="button"
+  tabindex="0"
+  aria-label="Close modal"
+  onclick={handleBackdropClick}
+  onkeydown={handleBackdropKeydown}
+  transition:fade={{ duration: 200 }}
+>
+  <div
+    bind:this={modalEl}
+    class="modal"
+    role="dialog"
+    aria-modal="true"
+    tabindex="-1"
+    onclick={(e) => e.stopPropagation()}
+    onkeydown={(e) => e.stopPropagation()}
+    transition:scale={{ duration: 300, start: 0.9, opacity: 0 }}
+  >
     {#if header}
       <div class="modal-header">
         {@render header()}
@@ -49,6 +93,7 @@
     align-items: center;
     justify-content: center;
     z-index: 1000;
+    outline: none;
   }
 
   .modal {
@@ -60,6 +105,7 @@
     width: 90%;
     max-width: 420px;
     min-height: 300px;
+    outline: none;
   }
 
   .modal-header {
